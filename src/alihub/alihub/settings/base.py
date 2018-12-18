@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'corsheaders',
+    'algoliasearch_django',
     # 'stream_django',
 ]
 
@@ -216,6 +217,11 @@ SECURE_HSTS_SECONDS             = 1000000
 SECURE_FRAME_DENY               = True
 
 
+ALGOLIA = {
+    'APPLICATION_ID': 'LYJ3R5YGQC',
+    'API_KEY': 'b7b19c6c1c5e75379eb9fbc130e6b3ff'
+}
 
+AUTO_INDEXING = True
 
 

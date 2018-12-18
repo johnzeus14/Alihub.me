@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'corsheaders',
+    'algoliasearch_django',
     # 'stream_django',
 ]
 
