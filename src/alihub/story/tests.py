@@ -42,8 +42,8 @@ class StoryAPITestCase(APITestCase):
 		story = Story.objects.create(
 			user         	=   user_obj,
 			content  		= 'hello world',
-			image    		= None,
-			video 			= None,
+			media    		= None,
+		
 			)
 
 
@@ -67,8 +67,8 @@ class StoryAPITestCase(APITestCase):
 	def test_post_item(self):
 		data  			 = {
 			'content': 'hello world',
-			'image'  : None,
-			'video'	 : None,
+			'media'  : None,
+			
 
 				}
 		url 			 = reverse('story:story-list')
@@ -78,8 +78,8 @@ class StoryAPITestCase(APITestCase):
 	def test_put_item(self):
 		data  			 = {
 			'content': 'hello world update',
-			'image'  : None,
-			'video'	 : None,
+			'media'  : None,
+		
 
 				}
 		story      		= Story.objects.first()
@@ -100,7 +100,7 @@ class StoryAPITestCase(APITestCase):
 		user_obj  = User.objects.first()
 		payload   = payload_handler(user_obj)
 		token_rsp = encode_handler(payload)
-		self.client.credentials(HTTP_AUTHORIZATION = JWT + token_rsp)
+		self.client.credentials(HTTP_AUTHORIZATION = 'JWT' + token_rsp)
 
 
 		story 		 = Story.objects.first()
@@ -112,27 +112,39 @@ class StoryAPITestCase(APITestCase):
 
 
 
-	# def test_post_item_with_user(self):
+	def test_post_item_with_user(self):
+		user_obj  = User.objects.first()
+		payload   = payload_handler(user_obj)
+		token_rsp = encode_handler(payload)
+		self.client.credentials(HTTP_AUTHORIZATION = 'JWT' + token_rsp)
+	
+	
+		url       = reverse('story:story-list')
+		data 	  =  {
+			'content': 'hello mars',
+			'media':	None,
+		}
+
+	# def test_delete_item_with_user(self):
 	# 	user_obj  = User.objects.first()
 	# 	payload   = payload_handler(user_obj)
 	# 	token_rsp = encode_handler(payload)
 	# 	self.client.credentials(HTTP_AUTHORIZATION = 'JWT' + token_rsp)
-	
-	
-	# 	url       = reverse('story:story-list')
-	# 	data 	  =  {
-	# 		'content'  	: 'hello mars',
-	# 		'image'    	: None,
-	# 		'video'		: None,
-	# 	}
 
+
+	# 	story 		 = Story.objects.first()
+	# 	url   		 = story.get_api_url()
+	# 	data 		 = {}
+	# 	response	 = self.client.delete(url, data, format = 'json')
+	# 	self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED )
+		
 
 		
 		
-	# 	response    = self.client.post(url, data, format = 'json')
-	# 	self.assertEqual(response.status_code, status.HTTP_400_METHOD_NOT_ALLOWED)
-	# 	print(response.token_rsp)
-
+		response    = self.client.post(url, data, format = 'json')
+		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+		print(payload)
+		print(token_rsp)
 		
 
 	
