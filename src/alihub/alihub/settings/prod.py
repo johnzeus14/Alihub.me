@@ -204,6 +204,16 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'accounts.user'
 
 
+REST_AUTH_REGISTER_SERIALIZERS = {
+    # 'LOGIN_SERIALIZER': 'path.to.custom.LoginSerializer',
+    # 'TOKEN_SERIALIZER': 'path.to.custom.TokenSerializer',
+    'REGISTER_SERIALIZER':'accounts.serializers.Registration',
+    'USER_DETAILS_SERIALIZER':'accounts.serializers.UserDetailSerializer',
+    
+}
+
+
+
 
 
 # CORS_REPLACE_HTTPS_REFERER      = True

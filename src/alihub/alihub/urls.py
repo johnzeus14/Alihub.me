@@ -49,7 +49,7 @@ urlpatterns = [
 
     url(r'^api/login/', obtain_jwt_token),
 
-    url(r'^api/auth/', include('rest_framework.urls')),
+    # url(r'^api/auth/', include('rest_framework.urls')),
 
     url(r'^auth/', include('rest_auth.urls')),
     

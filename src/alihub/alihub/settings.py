@@ -204,6 +204,15 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'accounts.user'
 
 
+# REST_AUTH_SERIALIZERS = {
+#     'LOGIN_SERIALIZER': 'accounts.serializer.UserLoginSerializer',
+#     'USER_DETAILS_SERIALIZER':'accounts.serializer.UserDetailSerializer',
+
+# }
+
+REST_AUTH_REGISTER_SERIALIZERS  = {
+    REGISTER_SERIALIZER:'accounts.serializer.UserRegisterSerializer',
+}
 
 
 
