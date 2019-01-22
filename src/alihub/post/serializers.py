@@ -8,7 +8,7 @@ from rest_framework.serializers import (
 	)
 from comment.models import Comment
 from comment.serializers import CommentSerializer
-from .models import Story
+from .models import Post
 
 
 from like.models import Like
@@ -17,13 +17,13 @@ from like.serializers import LikeSerializer
 
 
 
-class StorySerializer( ModelSerializer):	
+class PostSerializer( ModelSerializer):	
 	avatar  	=  	SerializerMethodField()
 	user 		=  SerializerMethodField()
 	
 	
 	class Meta:
-		model 	=	Story
+		model 	=	Post
 		fields	=	(
 			'id',
 			'user',
@@ -65,12 +65,12 @@ class StorySerializer( ModelSerializer):
 
 
 
-class StoryDetailSerializer( ModelSerializer):
+class PostDetailSerializer( ModelSerializer):
 	avatar  		=  	SerializerMethodField()
 	comments    	=  SerializerMethodField()
 
 	class Meta:
-		model 	=	Story
+		model 	=	Post
 		fields	=	(
 			'id',
 			'user',

@@ -58,6 +58,8 @@ class UserManager(BaseUserManager):
 class User (AbstractBaseUser):
 	full_name			=	models.CharField(max_length=3000, verbose_name = 'name of business or company')
 	email				=	models.EmailField(verbose_name = 'email address', max_length = 225, unique = True)
+
+
 	
 
 	verified 			=	models.BooleanField(default = False, blank  = True)

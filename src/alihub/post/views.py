@@ -6,12 +6,12 @@ from rest_framework.permissions import (
 	)
 from .serializers import (
 
-		StorySerializer,
-		StoryDetailSerializer,	
+		PostSerializer,
+		PostDetailSerializer,	
 	)
 
 
-from .models import Story
+from .models import Post
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -21,16 +21,16 @@ from .permissions import IsOwnerOrReadOnly
 
 
 
-class StoryAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+class PostAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 	lookup_field      =  'id'
-	serializer_class  = StorySerializer
+	serializer_class  = PostSerializer
 	permission_classes = [IsOwnerOrReadOnly,]
 
 	
 
 	def get_queryset(self):
 	
-		return Story.objects.all()
+		return Post.objects.all()
 
 	def perform_create(self, serializer):
 		serializer.save(user = self.request.user)
@@ -45,13 +45,13 @@ class StoryAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 
 
 
-class StoryRudView(generics.RetrieveUpdateDestroyAPIView):
+class PostRudView(generics.RetrieveUpdateDestroyAPIView):
 	lookup_field		=	'id'
-	serializer_class	=	StoryDetailSerializer
+	serializer_class	=	PostDetailSerializer
 	permission_classes = [IsOwnerOrReadOnly,]
 
 	def get_queryset(self):
-		return Story.objects.all()
+		return Post.objects.all()
 
 	def perform_update(self, serializer):
 		serializer.save(user = self.request.user)

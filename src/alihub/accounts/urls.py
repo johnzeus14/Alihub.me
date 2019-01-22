@@ -19,6 +19,7 @@ from django.conf.urls import url
 
 from .views import  (
          FacebookLogin,
+         RegisterAPIView,
 		)
 
 app_name="account"
@@ -28,7 +29,7 @@ app_name="account"
 
 urlpatterns = [
    
-    
+     url(r'^register/$', RegisterAPIView.as_view(), name='register'),
     url(r'^facebook/$', FacebookLogin.as_view(), name='fb_login')
  
 ]

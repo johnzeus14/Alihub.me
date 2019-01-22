@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from rest_framework.reverse import reverse
 
 
 class ReviewManager(models.Manager):
@@ -29,3 +29,8 @@ class Review(models.Model):
 
 	def __str__(self):
 		return str(self.target) + 'Review'
+
+
+	def get_api_url(self):
+		return reverse('review:review-detail', kwargs = {'id':self.id})
+

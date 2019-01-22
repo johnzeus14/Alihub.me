@@ -49,12 +49,12 @@ INSTALLED_APPS = [
     #local apps
     'accounts',
     'userprofile',
-    'story',
+    'post',
     'comment',
     'like',
     'review',
-    'product',
     'category',
+
 
     #installed apps
     'rest_framework',
@@ -213,7 +213,11 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 
     
 }
-
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'sendgrid_username'
+EMAIL_HOST_PASSWORD = 'sendgrid_password'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # CORS_REPLACE_HTTPS_REFERER      = True
 # HOST_SCHEME                     = "https://"

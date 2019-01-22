@@ -33,7 +33,7 @@ urlpatterns = [
 
     url('accounts/', include('accounts.urls', namespace='accounts')),
     
-    url('story/', include('story.urls', namespace='story')),
+    url('post/', include('post.urls', namespace='post')),
 
     url('comment/', include('comment.urls', namespace='comment')),
 
@@ -41,19 +41,18 @@ urlpatterns = [
 
     url('review/', include('review.urls', namespace='review')),
 
-    url('product/', include('product.urls', namespace='product')),
 
     url('category/', include('category.urls', namespace='category')),
 
     url('like/', include('like.urls', namespace='like')),
 
-    url(r'^api/login/', obtain_jwt_token),
+    url('api/login/', obtain_jwt_token),
 
     # url(r'^api/auth/', include('rest_framework.urls')),
 
-    url(r'^auth/', include('rest_auth.urls')),
+    url('auth/', include('rest_auth.urls')),
     
-    url(r'^auth/registration/', include('rest_auth.registration.urls'))
+    url('registration/', include('rest_auth.registration.urls'))
    
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

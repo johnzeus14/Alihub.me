@@ -30,7 +30,7 @@ urlpatterns = [
     
     url(r'^$', CategoryAPIView.as_view(), name = 'category-list'),
 
-    url(r'^(?P<title>\w)/$', CategoryDetail.as_view(), name = 'category-detail'),
+    url(r'^(?P<title>\d+)/$', CategoryDetail.as_view(), name = 'category-detail'),
     
    
 ]

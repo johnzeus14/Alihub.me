@@ -7,8 +7,8 @@ from rest_framework.reverse import reverse
 
 # from django_countries.fields import CountryField
 
-from story.models import Story
-from product.models import Product
+from post.models import Post
+
 from review.models import Review
 
 
@@ -50,7 +50,10 @@ class Profile (models.Model):
 	
 
 	username     		 = models.CharField(unique = True, max_length = 300)
-	avatar       		 = models.FileField( blank = True , default = "{% static avatar.jpg%}" )
+
+	account_type 		 = models.CharField(max_length = 3000)
+
+	avatar       		 = models.FileField( blank = True )
 	bio   		  		 = models.CharField(max_length = 400, blank = True, verbose_name ='About')
 	website				 = models.CharField(max_length = 5000, blank =True)
 	phone 				 = models.IntegerField()

@@ -6,7 +6,7 @@ from rest_framework import generics
 
 from .serializers import CommentSerializer
 from .models import Comment
-from story.models import Story
+from post.models import Post
 
 from .permissions import IsOwnerOrReadOnly
 

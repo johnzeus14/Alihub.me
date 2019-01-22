@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     #local apps
     'accounts',
     'userprofile',
-    'story',
+    'post',
     'comment',
     'like',
     'review',

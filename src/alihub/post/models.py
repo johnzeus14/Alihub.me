@@ -9,11 +9,11 @@ from django.contrib.contenttypes.models import ContentType
 
 
 		
-class StoryManger(models.Manager):
+class PostManager(models.Manager):
 
 	def filter_by_instance(self, instance):
 		user 			= instance.user	
-		qs				= super(StoryManger, self).filter(user = user)
+		qs				= super(PostManager, self).filter(user = user)
 		return qs
 
 
@@ -21,7 +21,7 @@ class StoryManger(models.Manager):
 
 
 
-class Story(models.Model):
+class Post(models.Model):
 	user       		 =    models.ForeignKey(settings.AUTH_USER_MODEL , on_delete = models.CASCADE)
 
 	content    		 = 	models.CharField(max_length = 1000)
@@ -31,16 +31,16 @@ class Story(models.Model):
 
 	created_at  	 = models.DateTimeField(auto_now_add = True)
 
-	objects 		 =  StoryManger()
+	objects 		 =  PostManager()
 
 
 
 
 	def __str__(self):
-		return str(self.user.full_name)+'-'+ 'story'
+		return str(self.user.full_name)+'-'+ 'post'
 
 	def get_api_url(self):
-		return reverse('story:story-detail', kwargs = {'id':self.id})
+		return reverse('post:post-detail', kwargs = {'id':self.id})
 
 
 	@property

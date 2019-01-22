@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 
-from story.models import Story
+from post.models import Post
 from .serializers import LikeSerializer
 from .models import Like
 
@@ -22,13 +22,13 @@ class LikeAPIView(views.APIView):
 	permission_classes = (IsAuthenticated)
 
 
-	def post(self, *args, **kwargs):
+	def get(self, *args, **kwargs):
 		user     	 = self.request.user
 		obj      	 = get_object_or_404(Like)
 
 		target   	 = ContentType.objects.get_for_model(Story)
 		object_id 	 = target.id
-		likes_count  = obj.likes_count
+		liked  		= obj.liked
 		if user.is_authenticated():
 			if liked  == True:
 				obj.likes_count =+ 1

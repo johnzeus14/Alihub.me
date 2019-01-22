@@ -11,19 +11,20 @@ encode_handler  = api_settings.JWT_ENCODE_HANDLER
 
 
 from django.contrib.auth import get_user_model
+
+
+from .models import Post
 from django.contrib.contenttypes.models import ContentType
 
 
-
-
-from .models import Review
+from post.models import Post
 from userprofile.models import Profile
 
 
 User = get_user_model()
 
 
-class ReviewAPITestCase(APITestCase):
+class PostAPITestCase(APITestCase):
 
 
 	def setUp(self):
@@ -32,20 +33,15 @@ class ReviewAPITestCase(APITestCase):
 		user_obj.set_password ('oldskool123')
 		user_obj.save()
 
-		user_target  =  User( email = 'basketmouth@gmail.com', full_name = 'Basket benjamin')
-		user_target.set_password ('oldskool123')
-		user_target.save()
-
-		review = Review.objects.create(
+		post = Post.objects.create(
 			user         	=   user_obj,
-			target 			= 	user_target,
-			content  		= 'my first Review',
+			content  		= 'hello world',
 			media    		= None,
 			)
 
 		profile = Profile.objects.create(
 				user  			= user_obj,
-				username		= 'ALihub',
+				username		= 'zeus',
 				avatar			= None,
 				bio				= 'The official page of Alihub',
 				category 		= 'Telecomunication',
@@ -61,17 +57,23 @@ class ReviewAPITestCase(APITestCase):
 
 	def test_single_user(self):
 		user_obj = User.objects.count()
-		self.assertEqual(user_obj, 2)
+		self.assertEqual(user_obj, 1)
 
 
-	def test_single_review(self):
-		review  = Review.objects.count()
-		self.assertEqual(review, 1)
+	def test_single_post(self):
+		post  = Post.objects.count()
+		self.assertEqual(post, 1)
 
 
+	def test_get_list(self):
+		
+		data			 = {}
+		url 			 = reverse('post:post-list')
+		response 		 = self.client.get(url, data, format = 'json')
+		self.assertEqual = (response.status_code, status.HTTP_200_OK)
 
 
-	def test_post_review_with_user(self):
+	def test_post_with_user(self):
 		user_obj  = User.objects.first()
 		payload   = payload_handler(user_obj)
 		token_rsp = encode_handler(payload)
@@ -87,13 +89,13 @@ class ReviewAPITestCase(APITestCase):
 			'content'  		:'My first comment',
 			'media'    		:None,
 			}
-		url 			 = reverse('review:review-list')
+		url 			 = reverse('post:post-list')
 		print(data)
 		response 		 = self.client.post(url, data, format = 'json')
 		self.assertEqual = (response.status_code, status.HTTP_200_OK)
 
 
-	def test_put_review_with_user(self):
+	def test_put_post_with_user(self):
 		user_obj  = User.objects.first()
 		payload   = payload_handler(user_obj)
 		token_rsp = encode_handler(payload)
@@ -105,17 +107,17 @@ class ReviewAPITestCase(APITestCase):
 		data			 = {
 
 		
-			'content'  		:'My last review',
+			'content'  		:'My last post',
 			'image'    		:None,
 			}
 		print(data)
-		url 			 = reverse('review:review-list')
+		url 			 = reverse('comment:comment-list')
 		print(url)
 		response 		 = self.client.post(url, data, format = 'json')
 		self.assertEqual = (response.status_code, status.HTTP_200_OK)
 
 
-	def test_delete_review_with_user(self):
+	def test_delete_post_with_user(self):
 		user_obj  = User.objects.first()
 		payload   = payload_handler(user_obj)
 		token_rsp = encode_handler(payload)
@@ -126,8 +128,8 @@ class ReviewAPITestCase(APITestCase):
 		
 		data			 = {}
 		print( str(data) + 'the deleted data')
-		review 			= Review.objects.first()
-		url 			= review.get_api_url()
+		post 			= Post.objects.first()
+		url 			= post.get_api_url()
 
 	
 		response 		 = self.client.delete(url, data, format = 'json')
@@ -135,4 +137,4 @@ class ReviewAPITestCase(APITestCase):
 
 
 
-	# 	
+		

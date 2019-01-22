@@ -14,11 +14,10 @@ from django_countries.serializers import CountryFieldMixin
 # from accounts.serializers import AccountDetailSerializer
 from django.contrib.auth import get_user_model
 
-from story.serializers import StorySerializer
-from story.models import Story
+from post.serializers import PostSerializer
+from post.models import Post
 
-from product.serializers import ProductSerializer
-from product.models import Product
+
 
 from review.serializers import ReviewSerializer
 from review.models import Review
